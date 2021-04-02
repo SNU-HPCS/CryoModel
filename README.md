@@ -119,10 +119,10 @@ python3.8 ./run.py {cacti_config_file} {temperature} {node} {vdd} {vth} {capacit
 
 ## Contributors
 ------------------
- * Dongmoon Min
- * Ilkwon Byun
- * Gyuhyeon Lee
- * Jangwoo Kim
+ * [Dongmoon Min](https://hpcs.snu.ac.kr/~dongmoon/)
+ * [Ilkwon Byun](https://hpcs.snu.ac.kr/~ilkwon/)
+ * [Gyuhyeon Lee](https://hpcs.snu.ac.kr/~guhylee/)
+ * [Jangwoo Kim](https://hpcs.snu.ac.kr/~jangwoo/)
 
 
 ## Publications
