@@ -28,9 +28,9 @@ The updated version will be released soon.
  * Python 3.8
  * Protobuf (pip install protobuf)
 
-------------------
-## Cryo-MOSFET
 
+## Cryo-MOSFET
+------------------
 Cryo-MOSFET predicts MOSFET (i.e., Ion, Ioff) and wire characteristics (i.e., wire resistivity) at low temperatures.
 
 #### Command:
@@ -62,9 +62,9 @@ cd cryomosfet
 python3.8 ./pgen.py -mm 1 -t 77 -n 22 -d 0.8 -r 0.5 -wm 1
 ```
 
-------------------
-## Cryo-MEM
 
+## Cryo-MEM
+------------------
 Cryo-MEM generates a target temperature-optimal memory design (i.e., DRAM, cache) and reports its area, latency, and power consumption, based on the MOSFET and wire characteristics obtained from the Cryo-MOSFET.
 We highly recommend users to use the relative performance values (e.g., 77K SRAM is 2 times faster than 300K SRAM), not the absolute numbers (e.g., 2ns of access latency of 77K SRAM) for their research.
 
@@ -116,9 +116,18 @@ python3.8 ./run.py {cacti_config_file} {temperature} {node} {vdd} {vth} {capacit
 		cd CryoMEM
 		python3.8 run.py ./configs/DRAM.cfg 77 22 1.2 0.4 262144 dram 1.2 0.4
 
-## Publications
 
-If you use this modeling framework in your research, please cite all of the papers below.
+## Contributors
+------------------
+ * Dongmoon Min
+ * Ilkwon Byun
+ * Gyuhyeon Lee
+ * Jangwoo Kim
+
+
+## Publications
+------------------
+If you use this modeling framework for your research, please cite the papers below.
 
 [\[1\]](#markdown-header-publications) [G.-h. Lee, D. Min, I. Byun, and J. Kim, “Cryogenic computer architecture modeling with memory-side case studies,” in *Proceedings of the 46th International Symposium on Computer Architecture (ISCA’19).*](https://dl.acm.org/doi/abs/10.1145/3307650.3322219)
 
