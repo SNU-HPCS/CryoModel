@@ -4,7 +4,6 @@
 
 # CryoModel
 
-------------------
 
 CryoModel is **the cryogenic DRAM, cache, and CPU-pipeline performance modeling framework**.
 CryoModel predicts the performance and power of DRAM, cache, and CPU-pipeline running at the extremely low temperature (e.g., 77K).
@@ -30,7 +29,7 @@ The updated version will be released soon.
 
 
 ## Cryo-MOSFET
-------------------
+
 Cryo-MOSFET predicts MOSFET (i.e., Ion, Ioff) and wire characteristics (i.e., wire resistivity) at low temperatures.
 
 #### Command:
@@ -64,7 +63,7 @@ python3.8 ./pgen.py -mm 1 -t 77 -n 22 -d 0.8 -r 0.5 -wm 1
 
 
 ## Cryo-MEM
-------------------
+
 Cryo-MEM generates a target temperature-optimal memory design (i.e., DRAM, cache) and reports its area, latency, and power consumption, based on the MOSFET and wire characteristics obtained from the Cryo-MOSFET.
 We highly recommend users to use the relative performance values (e.g., 77K SRAM is 2 times faster than 300K SRAM), not the absolute numbers (e.g., 2ns of access latency of 77K SRAM) for their research.
 
@@ -118,7 +117,7 @@ python3.8 ./run.py {cacti_config_file} {temperature} {node} {vdd} {vth} {capacit
 
 
 ## Contributors
-------------------
+
  * [Dongmoon Min](https://hpcs.snu.ac.kr/~dongmoon/)
  * [Ilkwon Byun](https://hpcs.snu.ac.kr/~ilkwon/)
  * [Gyuhyeon Lee](https://hpcs.snu.ac.kr/~guhylee/)
@@ -126,7 +125,7 @@ python3.8 ./run.py {cacti_config_file} {temperature} {node} {vdd} {vth} {capacit
 
 
 ## Publications
-------------------
+
 If you use this modeling framework for your research, please cite the papers below.
 
 [\[1\]](#markdown-header-publications) [G.-h. Lee, D. Min, I. Byun, and J. Kim, “Cryogenic computer architecture modeling with memory-side case studies,” in *Proceedings of the 46th International Symposium on Computer Architecture (ISCA’19).*](https://dl.acm.org/doi/abs/10.1145/3307650.3322219)
