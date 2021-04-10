@@ -7,7 +7,7 @@
 
 CryoModel is **the cryogenic DRAM, cache, and CPU-pipeline performance modeling framework**.
 CryoModel predicts the performance and power of DRAM, cache, and CPU-pipeline running at the extremely low temperature (e.g., 77K).
-CryoModel is developed by **[HPCS lab](https://hpcs.snu.ac.kr)** in Seoul National University (*SNU*).
+CryoModel is developed by **[HPCS Lab](https://hpcs.snu.ac.kr)** in Seoul National University (*SNU*).
 
 CryoModel consists of the following three models: *Cryo-MOSFET*, *Cryo-MEM*, and *Cryo-Pipeline*.
 Please refer to our CryoRAM [\[1\]](#markdown-header-publications), CryoCache [\[2\]](#markdown-header-publications), and CryoCore [\[3\]](#markdown-header-publications) papers for more details of our modeling methodology.
