@@ -134,4 +134,4 @@ If you use this modeling framework for your research, please cite the papers bel
 
 [\[3\]](#markdown-header-publications) [Byun, I., Min, D., Lee, G. H., Na, S., & Kim, J. "CryoCore: A Fast and Dense Processor Architecture for Cryogenic Computing." *Proceedings of the 47th International Symposium on Computer Architecture (ISCA'20).*](https://ieeexplore.ieee.org/abstract/document/9138996)
 
-[\[4\]](#markdown-header-publications) [Min, D., Chung, Y., Byun, I., Kim, J., & Kim, J. "CryoWire: wire-driven microarchitecture designs for cryogenic computing." *ASPLOS 2022: Proceedings of the 27th ACM International Conference on Architectural Support for Programming Languages and Operating Systems (ASPLOS'22).*](https://dl.acm.org/doi/abs/10.1145/3503222.3507749)
+[\[4\]](#markdown-header-publications) [Min, D., Chung, Y., Byun, I., Kim, J., & Kim, J. "CryoWire: wire-driven microarchitecture designs for cryogenic computing." *Proceedings of the 27th ACM International Conference on Architectural Support for Programming Languages and Operating Systems (ASPLOS'22).*](https://dl.acm.org/doi/abs/10.1145/3503222.3507749)
