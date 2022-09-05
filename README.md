@@ -141,9 +141,10 @@ python3.8 ./run.py {cacti_config_file} {temperature} {node} {vdd} {vth} {capacit
 
 ## Cryo-Pipeline
 
-Cryo-Pipeline generates a target temperature-optimal logic design by using its Verilog code, and reports its latency and power consumption based on the MOSFET and wire characteristics from the Cryo-MOSFET.
+By taking the Verilog code of target hardware, Cryo-Pipeline reports its latency and power consumption based on the MOSFET and wire characteristics derived from the Cryo-MOSFET.
 As Cryo-Pipeline utilize commercial synthesis tool (i.e., Design Compiler), users can predict the performance of the any Verilog-defined logic design (e.g., CPU pipeline, on-chip router) running at the cryogenic temperatures (77K and 4K).
-Before using Cryo-Pipeline, Users must install Synopsys Design Compiler Topographical Mode and Milkyway.
+
+Before using Cryo-Pipeline, users must install Synopsys Design Compiler Topographical Mode and Milkyway.
 
 #### Command:
 ```
@@ -178,10 +179,10 @@ python3.8 ./run.py --design_name {name of Verilog design} --temperature {tempera
 		# The current example uses the open-source router Verilog design (EVA) by default.
 
 		# for the Verilog design running at 77K
-		python3.8 ./run.py --design_name router_wrap --temperature 77 --node 45 --vdd 1.25 --vth 0.46893
+		python3.8 run.py --design_name router_wrap --temperature 77 --node 45 --vdd 1.25 --vth 0.46893
 		
 		# for the Verilog design running at 4K
-		python3.8 ./run.py --design_name router_wrap --temperature 4 --node 45 --vdd 1.25 --vth 0.46893
+		python3.8 run.py --design_name router_wrap --temperature 4 --node 45 --vdd 1.25 --vth 0.46893
 
 ## Contributors
 
