@@ -139,6 +139,49 @@ python3.8 ./run.py {cacti_config_file} {temperature} {node} {vdd} {vth} {capacit
 		# for the 4K DRAM memory
 		python3.8 run.py ./configs/DRAM.cfg 4 22 1.2 0.4 262144 dram 1.2 0.4
 
+## Cryo-Pipeline
+
+Cryo-Pipeline generates a target temperature-optimal logic design by using its Verilog code, and reports its latency and power consumption based on the MOSFET and wire characteristics from the Cryo-MOSFET.
+As Cryo-Pipeline utilize commercial synthesis tool (i.e., Design Compiler), users can predict the performance of the any Verilog-defined logic design (e.g., CPU pipeline, on-chip router) running at the cryogenic temperatures (77K and 4K).
+Before using Cryo-Pipeline, Users must install Synopsys Design Compiler Topographical Mode and Milkyway.
+
+#### Command:
+```
+python3.8 ./run.py --design_name {name of Verilog design} --temperature {temperature} --node {node} --vdd {vdd} --vth {vth}
+```
+
+#### Options:
+* design_name: The name of target-Verilog design in "src_vlg"
+* temperature: Target operating temperature (i.e., 300K-77K, 4K) [K]
+* node: transistor technology node [nm] (NOTE: currently, Cryo-Pipeline only support 45nm)
+* vdd: Supply voltage [V]
+* vth: Threshold voltage at 300K (i.e., Vth0_300K) [V]
+
+#### Output:
+* temperature-optimal logic design (.ddc file)
+* critical-path delay with transistor/wire-delay breakdown
+* power consumption (i.e., Static and dynamic power)
+
+#### Example:
+1. Move target Verilog design to "src_vlg" folder
+	:
+	
+		cd CryoPipeline
+		mv {target verilog design} ./src_vlg/
+
+
+2. Run CryoPipeline
+	:
+
+		cd CryoPipeline
+
+		# The current example uses the open-source router Verilog design (EVA) by default.
+
+		# for the Verilog design running at 77K
+		python3.8 ./run.py --design_name router_wrap --temperature 77 --node 45 --vdd 1.25 --vth 0.46893
+		
+		# for the Verilog design running at 4K
+		python3.8 ./run.py --design_name router_wrap --temperature 4 --node 45 --vdd 1.25 --vth 0.46893
 
 ## Contributors
 
