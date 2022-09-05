@@ -1,0 +1,198 @@
+Information: Updating design information... (UID-85)
+Warning: Design 'router_wrap' contains 1 high-fanout nets. A fanout number of 1000 will be used for delay calculations involving these nets. (TIM-134)
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+Design : router_wrap
+Version: P-2019.03
+Date   : Mon Sep  5 08:14:25 2022
+****************************************
+
+ * Some/all delay information is back-annotated.
+
+ # A fanout number of 1000 was used for high fanout net computations.
+
+Operating Conditions: typical   Library: NangateOpenCellLibrary
+Wire Load Model Mode: Inactive.
+
+  Startpoint: genblk1.vcr/ips[3].ipc/chi/flit_dataq/q_reg[3]
+              (rising edge-triggered flip-flop clocked by clk)
+  Endpoint: genblk1.vcr/ips[8].ipc/fb/genblk2.samqc/queues[1].fc/genblk1.pop_addrq/q_reg[2]
+            (rising edge-triggered flip-flop clocked by clk)
+  Path Group: clk
+  Path Type: max
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock clk (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             0.00       0.00
+  genblk1.vcr/ips[3].ipc/chi/flit_dataq/q_reg[3]/CK (DFF_X2)
+                                                          0.00 #     0.00 r
+  genblk1.vcr/ips[3].ipc/chi/flit_dataq/q_reg[3]/Q (DFF_X2)
+                                                          0.17       0.17 r
+  genblk1.vcr/ips[3].ipc/chi/flit_dataq/q[3] (c_dff_width64_reset_type0_23)
+                                                          0.00       0.17 r
+  genblk1.vcr/ips[3].ipc/chi/flit_data_out[3] (rtr_channel_input_num_vcs2_packet_format2_max_payload_length4_min_payload_length0_route_info_width10_enable_link_pm1_flit_data_width64_reset_type0_6)
+                                                          0.00       0.17 r
+  genblk1.vcr/ips[3].ipc/U37/ZN (INV_X2)                  0.03 *     0.19 f
+  genblk1.vcr/ips[3].ipc/ivcs[0].ivcc/header_info_in[3]_BAR (vcr_ivc_ctrl_2_1_1_4_2_4_2_2_4_0_1_0_0_1_1_0_1_0_3_0)
+                                                          0.00       0.19 f
+  genblk1.vcr/ips[3].ipc/ivcs[0].ivcc/route_in_op_dec/data_in[3]_BAR (c_decode_num_ports10_27)
+                                                          0.00       0.19 f
+  genblk1.vcr/ips[3].ipc/ivcs[0].ivcc/route_in_op_dec/U13/ZN (NAND2_X1)
+                                                          0.02 *     0.21 r
+  genblk1.vcr/ips[3].ipc/ivcs[0].ivcc/route_in_op_dec/U14/ZN (NOR2_X1)
+                                                          0.01 *     0.23 f
+  genblk1.vcr/ips[3].ipc/ivcs[0].ivcc/route_in_op_dec/data_out[6] (c_decode_num_ports10_27)
+                                                          0.00       0.23 f
+  genblk1.vcr/ips[3].ipc/ivcs[0].ivcc/U14/ZN (NAND2_X2)
+                                                          0.02 *     0.25 r
+  genblk1.vcr/ips[3].ipc/ivcs[0].ivcc/U16/ZN (NAND2_X4)
+                                                          0.02 *     0.27 f
+  genblk1.vcr/ips[3].ipc/ivcs[0].ivcc/rf/route_in_op[6] (rtr_route_filter_num_message_classes2_num_resource_classes1_num_vcs_per_class1_num_ports10_num_neighbors_per_dim3_num_nodes_per_router4_restrict_turns1_connectivity2_routing_type0_dim_order0_port_id3_vc_id0)
+                                                          0.00       0.27 f
+  genblk1.vcr/ips[3].ipc/ivcs[0].ivcc/rf/route_out_op[6] (rtr_route_filter_num_message_classes2_num_resource_classes1_num_vcs_per_class1_num_ports10_num_neighbors_per_dim3_num_nodes_per_router4_restrict_turns1_connectivity2_routing_type0_dim_order0_port_id3_vc_id0)
+                                                          0.00       0.27 f
+  genblk1.vcr/ips[3].ipc/ivcs[0].ivcc/route_op[6] (vcr_ivc_ctrl_2_1_1_4_2_4_2_2_4_0_1_0_0_1_1_0_1_0_3_0)
+                                                          0.00       0.27 f
+  genblk1.vcr/ips[3].ipc/route_ivc_op[6] (vcr_ip_ctrl_mac_16_2_1_1_4_2_4_2_2_0_4_0_1_64_1_0_0_0_0_1_1_0_1_1_1_3_0)
+                                                          0.00       0.27 f
+  genblk1.vcr/alo/route_ip_ivc_op[66] (vcr_alloc_mac_num_message_classes2_num_resource_classes1_num_vcs_per_class1_num_ports10_vc_allocator_type0_vc_arbiter_type0_sw_allocator_type0_sw_arbiter_type0_spec_type3_reset_type0)
+                                                          0.00       0.27 f
+  genblk1.vcr/alo/genblk1.vc_core_sep_if/route_ip_ivc_op[66] (vcr_vc_alloc_sep_if_num_message_classes2_num_resource_classes1_num_vcs_per_class1_num_ports10_arbiter_type0_reset_type0)
+                                                          0.00       0.27 f
+  genblk1.vcr/alo/genblk1.vc_core_sep_if/mcs[0].ips[3].ircs[0].icvcs[0].elig_ovc_sel/select[6] (c_select_1ofn_num_ports10_width2_46)
+                                                          0.00       0.27 f
+  genblk1.vcr/alo/genblk1.vc_core_sep_if/mcs[0].ips[3].ircs[0].icvcs[0].elig_ovc_sel/U2/ZN (NAND2_X2)
+                                                          0.02 *     0.29 r
+  genblk1.vcr/alo/genblk1.vc_core_sep_if/mcs[0].ips[3].ircs[0].icvcs[0].elig_ovc_sel/U5/ZN (NAND4_X4)
+                                                          0.03 *     0.32 f
+  genblk1.vcr/alo/genblk1.vc_core_sep_if/mcs[0].ips[3].ircs[0].icvcs[0].elig_ovc_sel/data_out[0] (c_select_1ofn_num_ports10_width2_46)
+                                                          0.00       0.32 f
+  genblk1.vcr/alo/genblk1.vc_core_sep_if/mcs[0].ips[3].ircs[0].icvcs[0].orcs[0].gnt_ocvc_arb/req_pr[0] (c_arbiter_num_ports1_num_priorities1_arbiter_type0_reset_type0_216)
+                                                          0.00       0.32 f
+  genblk1.vcr/alo/genblk1.vc_core_sep_if/mcs[0].ips[3].ircs[0].icvcs[0].orcs[0].gnt_ocvc_arb/genblk1.gnt_lod/data_in[0] (c_lod_width1_216)
+                                                          0.00       0.32 f
+  genblk1.vcr/alo/genblk1.vc_core_sep_if/mcs[0].ips[3].ircs[0].icvcs[0].orcs[0].gnt_ocvc_arb/genblk1.gnt_lod/data_out[0] (c_lod_width1_216)
+                                                          0.00       0.32 f
+  genblk1.vcr/alo/genblk1.vc_core_sep_if/mcs[0].ips[3].ircs[0].icvcs[0].orcs[0].gnt_ocvc_arb/gnt_pr[0] (c_arbiter_num_ports1_num_priorities1_arbiter_type0_reset_type0_216)
+                                                          0.00       0.32 f
+  genblk1.vcr/alo/genblk1.vc_core_sep_if/U70/ZN (AND2_X2)
+                                                          0.04 *     0.36 f
+  genblk1.vcr/alo/genblk1.vc_core_sep_if/mcs[0].req_out_op_orc_ocvc_ip_irc_icvc_intl/data_in[39] (c_interleave_width100_num_blocks10_9)
+                                                          0.00       0.36 f
+  genblk1.vcr/alo/genblk1.vc_core_sep_if/mcs[0].req_out_op_orc_ocvc_ip_irc_icvc_intl/data_out[93] (c_interleave_width100_num_blocks10_9)
+                                                          0.00       0.36 f
+  genblk1.vcr/alo/genblk1.vc_core_sep_if/mcs[0].ops[9].orcs[0].ocvcs[0].req_out_ip_rb/data_in[3] (c_reduce_bits_num_ports10_width1_op2_10)
+                                                          0.00       0.36 f
+  genblk1.vcr/alo/genblk1.vc_core_sep_if/mcs[0].ops[9].orcs[0].ocvcs[0].req_out_ip_rb/ps[3].bop/data_in[0] (c_binary_op_num_ports1_width1_op2_106)
+                                                          0.00       0.36 f
+  genblk1.vcr/alo/genblk1.vc_core_sep_if/mcs[0].ops[9].orcs[0].ocvcs[0].req_out_ip_rb/ps[3].bop/data_out[0] (c_binary_op_num_ports1_width1_op2_106)
+                                                          0.00       0.36 f
+  genblk1.vcr/alo/genblk1.vc_core_sep_if/mcs[0].ops[9].orcs[0].ocvcs[0].req_out_ip_rb/data_out[3] (c_reduce_bits_num_ports10_width1_op2_10)
+                                                          0.00       0.36 f
+  genblk1.vcr/alo/genblk1.vc_core_sep_if/mcs[0].ops[9].orcs[0].ocvcs[0].gnt_out_ip_arb/req_pr[3] (c_arbiter_num_ports10_num_priorities1_arbiter_type0_reset_type0_10)
+                                                          0.00       0.36 f
+  genblk1.vcr/alo/genblk1.vc_core_sep_if/mcs[0].ops[9].orcs[0].ocvcs[0].gnt_out_ip_arb/genblk1.genblk1.rr_arb/req_pr[3] (c_rr_arbiter_10_1_1_0_10)
+                                                          0.00       0.36 f
+  genblk1.vcr/alo/genblk1.vc_core_sep_if/mcs[0].ops[9].orcs[0].ocvcs[0].gnt_out_ip_arb/genblk1.genblk1.rr_arb/prios[0].gnt_ab/req[3] (c_rr_arbiter_base_num_ports10_30)
+                                                          0.00       0.36 f
+  genblk1.vcr/alo/genblk1.vc_core_sep_if/mcs[0].ops[9].orcs[0].ocvcs[0].gnt_out_ip_arb/genblk1.genblk1.rr_arb/prios[0].gnt_ab/U19/ZN (AND2_X2)
+                                                          0.03 *     0.39 f
+  genblk1.vcr/alo/genblk1.vc_core_sep_if/mcs[0].ops[9].orcs[0].ocvcs[0].gnt_out_ip_arb/genblk1.genblk1.rr_arb/prios[0].gnt_ab/gnt_qual_lod/data_in[3] (c_lod_width10_61)
+                                                          0.00       0.39 f
+  genblk1.vcr/alo/genblk1.vc_core_sep_if/mcs[0].ops[9].orcs[0].ocvcs[0].gnt_out_ip_arb/genblk1.genblk1.rr_arb/prios[0].gnt_ab/gnt_qual_lod/U6/ZN (NOR2_X1)
+                                                          0.04 *     0.43 r
+  genblk1.vcr/alo/genblk1.vc_core_sep_if/mcs[0].ops[9].orcs[0].ocvcs[0].gnt_out_ip_arb/genblk1.genblk1.rr_arb/prios[0].gnt_ab/gnt_qual_lod/U8/ZN (NAND2_X1)
+                                                          0.02 *     0.45 f
+  genblk1.vcr/alo/genblk1.vc_core_sep_if/mcs[0].ops[9].orcs[0].ocvcs[0].gnt_out_ip_arb/genblk1.genblk1.rr_arb/prios[0].gnt_ab/gnt_qual_lod/U9/ZN (INV_X1)
+                                                          0.01 *     0.46 r
+  genblk1.vcr/alo/genblk1.vc_core_sep_if/mcs[0].ops[9].orcs[0].ocvcs[0].gnt_out_ip_arb/genblk1.genblk1.rr_arb/prios[0].gnt_ab/gnt_qual_lod/U10/ZN (NAND2_X1)
+                                                          0.02 *     0.48 f
+  genblk1.vcr/alo/genblk1.vc_core_sep_if/mcs[0].ops[9].orcs[0].ocvcs[0].gnt_out_ip_arb/genblk1.genblk1.rr_arb/prios[0].gnt_ab/gnt_qual_lod/U14/ZN (NOR2_X1)
+                                                          0.02 *     0.50 r
+  genblk1.vcr/alo/genblk1.vc_core_sep_if/mcs[0].ops[9].orcs[0].ocvcs[0].gnt_out_ip_arb/genblk1.genblk1.rr_arb/prios[0].gnt_ab/gnt_qual_lod/data_out[8] (c_lod_width10_61)
+                                                          0.00       0.50 r
+  genblk1.vcr/alo/genblk1.vc_core_sep_if/mcs[0].ops[9].orcs[0].ocvcs[0].gnt_out_ip_arb/genblk1.genblk1.rr_arb/prios[0].gnt_ab/U39/ZN (INV_X1)
+                                                          0.01 *     0.51 f
+  genblk1.vcr/alo/genblk1.vc_core_sep_if/mcs[0].ops[9].orcs[0].ocvcs[0].gnt_out_ip_arb/genblk1.genblk1.rr_arb/prios[0].gnt_ab/U41/ZN (OAI21_X2)
+                                                          0.05 *     0.56 r
+  genblk1.vcr/alo/genblk1.vc_core_sep_if/mcs[0].ops[9].orcs[0].ocvcs[0].gnt_out_ip_arb/genblk1.genblk1.rr_arb/prios[0].gnt_ab/gnt[8] (c_rr_arbiter_base_num_ports10_30)
+                                                          0.00       0.56 r
+  genblk1.vcr/alo/genblk1.vc_core_sep_if/mcs[0].ops[9].orcs[0].ocvcs[0].gnt_out_ip_arb/genblk1.genblk1.rr_arb/gnt_pr[8] (c_rr_arbiter_10_1_1_0_10)
+                                                          0.00       0.56 r
+  genblk1.vcr/alo/genblk1.vc_core_sep_if/mcs[0].ops[9].orcs[0].ocvcs[0].gnt_out_ip_arb/gnt_pr[8] (c_arbiter_num_ports10_num_priorities1_arbiter_type0_reset_type0_10)
+                                                          0.00       0.56 r
+  genblk1.vcr/alo/genblk1.vc_core_sep_if/U509/ZN (AND2_X4)
+                                                          0.04 *     0.59 r
+  genblk1.vcr/alo/genblk1.vc_core_sep_if/mcs[0].gnt_out_op_orc_ocvc_ip_irc_iocvc_intl/data_in[98] (c_interleave_width100_num_blocks10_8)
+                                                          0.00       0.59 r
+  genblk1.vcr/alo/genblk1.vc_core_sep_if/mcs[0].gnt_out_op_orc_ocvc_ip_irc_iocvc_intl/data_out[89] (c_interleave_width100_num_blocks10_8)
+                                                          0.00       0.59 r
+  genblk1.vcr/alo/genblk1.vc_core_sep_if/mcs[0].ips[8].ircs[0].icvcs[0].gnt_out_orc_ocvc_or/data_in[9] (c_binary_op_num_ports10_width1_op2_31)
+                                                          0.00       0.59 r
+  genblk1.vcr/alo/genblk1.vc_core_sep_if/mcs[0].ips[8].ircs[0].icvcs[0].gnt_out_orc_ocvc_or/U1/ZN (NOR2_X2)
+                                                          0.01 *     0.60 f
+  genblk1.vcr/alo/genblk1.vc_core_sep_if/mcs[0].ips[8].ircs[0].icvcs[0].gnt_out_orc_ocvc_or/U5/ZN (NAND4_X4)
+                                                          0.02 *     0.62 r
+  genblk1.vcr/alo/genblk1.vc_core_sep_if/mcs[0].ips[8].ircs[0].icvcs[0].gnt_out_orc_ocvc_or/data_out[0] (c_binary_op_num_ports10_width1_op2_31)
+                                                          0.00       0.62 r
+  genblk1.vcr/alo/genblk1.vc_core_sep_if/mcs[0].ips[8].ircs[0].icvcs[0].gnt_out_ovc_agn/data_in[0] (c_align_in_width1_out_width2_offset0_101)
+                                                          0.00       0.62 r
+  genblk1.vcr/alo/genblk1.vc_core_sep_if/mcs[0].ips[8].ircs[0].icvcs[0].gnt_out_ovc_agn/data_out[0] (c_align_in_width1_out_width2_offset0_101)
+                                                          0.00       0.62 r
+  genblk1.vcr/alo/genblk1.vc_core_sep_if/gnt_ip_ivc[16] (vcr_vc_alloc_sep_if_num_message_classes2_num_resource_classes1_num_vcs_per_class1_num_ports10_arbiter_type0_reset_type0)
+                                                          0.00       0.62 r
+  genblk1.vcr/alo/vc_gnt_ip_ivc[16] (vcr_alloc_mac_num_message_classes2_num_resource_classes1_num_vcs_per_class1_num_ports10_vc_allocator_type0_vc_arbiter_type0_sw_allocator_type0_sw_arbiter_type0_spec_type3_reset_type0)
+                                                          0.00       0.62 r
+  genblk1.vcr/ips[8].ipc/vc_gnt_ivc[0] (vcr_ip_ctrl_mac_16_2_1_1_4_2_4_2_2_0_4_0_1_64_1_0_0_0_0_1_1_0_1_1_1_8_0)
+                                                          0.00       0.62 r
+  genblk1.vcr/ips[8].ipc/U12/ZN (INV_X2)                  0.01 *     0.63 f
+  genblk1.vcr/ips[8].ipc/U14/ZN (NAND2_X2)                0.01 *     0.64 r
+  genblk1.vcr/ips[8].ipc/genblk1.spec_mask_sel/data_in[0] (c_select_1ofn_num_ports2_width1_63)
+                                                          0.00       0.64 r
+  genblk1.vcr/ips[8].ipc/genblk1.spec_mask_sel/U3/ZN (NAND2_X2)
+                                                          0.02 *     0.66 f
+  genblk1.vcr/ips[8].ipc/genblk1.spec_mask_sel/U4/ZN (NAND2_X4)
+                                                          0.01 *     0.67 r
+  genblk1.vcr/ips[8].ipc/genblk1.spec_mask_sel/data_out[0] (c_select_1ofn_num_ports2_width1_63)
+                                                          0.00       0.67 r
+  genblk1.vcr/ips[8].ipc/U3/ZN (NAND2_X4)                 0.02 *     0.69 f
+  genblk1.vcr/ips[8].ipc/U46/ZN (INV_X8)                  0.02 *     0.71 r
+  genblk1.vcr/ips[8].ipc/fb/pop_valid (rtr_flit_buffer_2_16_64_13_0_1_0_0_1_0_1_0_1)
+                                                          0.00       0.71 r
+  genblk1.vcr/ips[8].ipc/fb/genblk2.samqc/pop_valid (c_samq_ctrl_num_queues2_num_slots_per_queue8_enable_bypass1_fast_pop_next_addr1_reset_type0_1)
+                                                          0.00       0.71 r
+  genblk1.vcr/ips[8].ipc/fb/genblk2.samqc/U2/ZN (AND2_X4)
+                                                          0.04 *     0.75 r
+  genblk1.vcr/ips[8].ipc/fb/genblk2.samqc/queues[1].fc/pop (c_fifo_ctrl_depth8_extra_addr_width1_offset8_fast_almost_empty0_enable_bypass1_reset_type0_1)
+                                                          0.00       0.75 r
+  genblk1.vcr/ips[8].ipc/fb/genblk2.samqc/queues[1].fc/U19/Z (MUX2_X1)
+                                                          0.06 *     0.81 f
+  genblk1.vcr/ips[8].ipc/fb/genblk2.samqc/queues[1].fc/genblk1.pop_addrq/d[2] (c_dff_4_0_8_2)
+                                                          0.00       0.81 f
+  genblk1.vcr/ips[8].ipc/fb/genblk2.samqc/queues[1].fc/genblk1.pop_addrq/U8/ZN (NAND2_X1)
+                                                          0.01 *     0.82 r
+  genblk1.vcr/ips[8].ipc/fb/genblk2.samqc/queues[1].fc/genblk1.pop_addrq/U11/ZN (NAND2_X1)
+                                                          0.01 *     0.83 f
+  genblk1.vcr/ips[8].ipc/fb/genblk2.samqc/queues[1].fc/genblk1.pop_addrq/q_reg[2]/D (DFFR_X1)
+                                                          0.00 *     0.83 f
+  data arrival time                                                  0.83
+
+  clock clk (rise edge)                                   0.40       0.40
+  clock network delay (ideal)                             0.00       0.40
+  genblk1.vcr/ips[8].ipc/fb/genblk2.samqc/queues[1].fc/genblk1.pop_addrq/q_reg[2]/CK (DFFR_X1)
+                                                          0.00       0.40 r
+  library setup time                                     -0.04       0.36
+  data required time                                                 0.36
+  --------------------------------------------------------------------------
+  data required time                                                 0.36
+  data arrival time                                                 -0.83
+  --------------------------------------------------------------------------
+  slack (VIOLATED)                                                  -0.47
+
+
+1
