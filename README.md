@@ -59,7 +59,7 @@ python3.8 ./pgen.py -mm {mosfet_mode} -t {temperature} -n {node} -d {vdd} -r {vt
  * Rwire: wire resistivity [Ω * nm]
 
 #### example:
-For 77K MOSFET,
+For 300K-77K MOSFET,
 ```
 cd CryoMEM/CryoMOSFET_77K
 python3.8 ./pgen.py -mm 1 -t 77 -n 22 -d 0.8 -r 0.5 -wm 1
