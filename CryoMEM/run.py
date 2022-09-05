@@ -114,7 +114,7 @@ def parse_arguments():
 
     parser.add_argument('cacti_config_file', help='Config file for cacti')
 
-    parser.add_argument('--pgen', help='Path for pgen', default='../CryoMOSFET/pgen.py')
+    parser.add_argument('--pgen', help='Path for pgen', default='./CryoMOSFET_77K/pgen.py')
 
     parser.add_argument('temperature', help='Target operating temperature (77-300 [K])', type=int)
     parser.add_argument('node', help='Technology node size [nm]', type=int)
@@ -136,6 +136,16 @@ def parse_arguments():
 
 def main():
     args = parse_arguments()
+
+    # Code to support 4K
+    pgen_path = None
+    if args.temperature >= 77:
+        pgen_path = args.pgen
+    elif args.temperature == 4:
+        pgen_path = './CryoMOSFET_4K/pgen.py'
+    else:
+        print ("Current version of CryoMEM does not support {}K.".format (args.temperature))
+        exit ()
 
     hp_results = pgen.run(args.pgen, pgen.mosfet_mode.HP, args.temperature, args.node, args.vdd, args.vth)
     if args.cell_type == 'dram':
