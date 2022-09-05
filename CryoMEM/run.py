@@ -153,9 +153,9 @@ def main():
     pgen_path = None
     if args.temperature >= 77:
         #pgen_path = args.pgen
-        pgen_path = './CryoMOSFET_77K/pgen.py'
+        pgen_path = '../CryoMOSFET/CryoMOSFET_77K/pgen.py'
     elif args.temperature == 4:
-        pgen_path = './CryoMOSFET_4K/pgen.py'
+        pgen_path = '../CryoMOSFET/CryoMOSFET_4K/pgen.py'
     else:
         print ("Current version of CryoMEM does not support {}K.".format (args.temperature))
         exit ()

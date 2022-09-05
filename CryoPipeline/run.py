@@ -37,16 +37,16 @@ def set_targets (design_name):
 
 
 def run_synthesis (design_name, temperature):
-    if not os.path.isfile ("./latency_result/critical_path_300k"):
+    if not os.path.isfile ("./latency_result/{}_critical_path_300k".format (design_name)):
         if not os.path.isfile ("./{}_300k.ddc".format (design_name)):
             os.system ("make dc-topo-300k")
-    if not os.path.isfile ("./latency_result/critical_path_300k_nowire"):
+    if not os.path.isfile ("./latency_result/{}_critical_path_300k_nowire".format (design_name)):
         if not os.path.isfile ("./{}_300k_nowire.ddc".format (design_name)):
             os.system ("make dc-topo-300k-nowire")
-    if not os.path.isfile ("./latency_result/critical_path_{}k".format (temperature)):
+    if not os.path.isfile ("./latency_result/{}_critical_path_{}k".format (design_name, temperature)):
         if not os.path.isfile ("./{}_{}k.ddc".format (design_name, temperature)):
             os.system ("make dc-topo-{}k".format (temperature))
-    if not os.path.isfile ("./latency_result/critical_path_{}k_nowire".format (temperature)):
+    if not os.path.isfile ("./latency_result/{}_critical_path_{}k_nowire".format (design_name, temperature)):
         if not os.path.isfile ("./{}_{}k_nowire.ddc".format (design_name, temperature)):
             os.system ("make dc-topo-{}k-nowire".format (temperature))
 
@@ -74,17 +74,17 @@ def run_pgen (temperature, node=45, vdd=None, vth=None):
     pgen_output = None
     if temperature >= 77:
         if vdd == None and vth == None:
-            result = run ("python CryoMOSFET_77K/pgen.py -n {} -t {}".format (node, temperature), \
+            result = run ("python ../CryoMOSFET/CryoMOSFET_77K/pgen.py -n {} -t {}".format (node, temperature), \
                     stdout=PIPE, stderr=PIPE, universal_newlines=True, shell=True)
         else:
-            result = run ("python CryoMOSFET_77K/pgen.py -n {} -d {} -r {} -t {}".format (node, vdd, vth, temperature), \
+            result = run ("python ../CryoMOSFET/CryoMOSFET_77K/pgen.py -n {} -d {} -r {} -t {}".format (node, vdd, vth, temperature), \
                     stdout=PIPE, stderr=PIPE, universal_newlines=True, shell=True)
     else:
         if vdd == None and vth == None:
-            result = run ("python CryoMOSFET_4K/pgen.py -n {} -t {}".format (node, temperature), \
+            result = run ("python ../CryoMOSFET/CryoMOSFET_4K/pgen.py -n {} -t {}".format (node, temperature), \
                     stdout=PIPE, stderr=PIPE, universal_newlines=True, shell=True)
         else:
-            result = run ("python CryoMOSFET_4K/pgen.py -n {} -d {} -r {} -t {}".format (node, vdd, vth, temperature), \
+            result = run ("python ../CryoMOSFET/CryoMOSFET_4K/pgen.py -n {} -d {} -r {} -t {}".format (node, vdd, vth, temperature), \
                     stdout=PIPE, stderr=PIPE, universal_newlines=True, shell=True)
     return result.stdout
 
