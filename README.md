@@ -6,11 +6,11 @@
 
 
 CryoModel is **the cryogenic DRAM, cache, and CPU-pipeline performance modeling framework**.
-CryoModel predicts the performance and power of DRAM, cache, and CPU-pipeline running at the extremely low temperature (e.g., 77K).
+CryoModel predicts the performance and power of DRAM, cache, and CPU-pipeline running at the extremely low temperature (i.e., 77K and 4K).
 CryoModel is developed by **[HPCS Lab](https://hpcs.snu.ac.kr)** in Seoul National University (*SNU*).
 
 CryoModel consists of the following three models: *Cryo-MOSFET*, *Cryo-MEM*, and *Cryo-Pipeline*.
-Please refer to our CryoRAM [\[1\]](#markdown-header-publications), CryoCache [\[2\]](#markdown-header-publications), and CryoCore [\[3\]](#markdown-header-publications) papers for more details of our modeling methodology.
+Please refer to our CryoRAM [\[1\]](#markdown-header-publications), CryoCache [\[2\]](#markdown-header-publications), CryoCore [\[3\]](#markdown-header-publications), CryoWire [\[4\]](#markdown-header-publications), and XQsim [\[5\]](#markdown-header-publications) papers for more details of our modeling methodology.
 
 #### Current version
 
@@ -18,19 +18,22 @@ The release of CryoModel is in progress; we are conducting further validation to
 We summarize the coverage of current version as follows. 
 The updated version will be released soon.
 
-* Cryo-MOSFET's MOSFET model is the version proposed in [\[1\]](#markdown-header-publications),[\[2\]](#markdown-header-publications), which does not include the model extension proposed in [\[3\]](#markdown-header-publications).
-* Cryo-MEM assumes wire resistivity's temperature dependency follows that of the bulk wire. 
-* Cryo-Pipeline is currently being prepared for the release. 
+* Cryo-MOSFET's 77K MOSFET model is the version proposed in [\[1\]](#markdown-header-publications),[\[2\]](#markdown-header-publications), which does not include the model extension proposed in [\[3\]](#markdown-header-publications). Its 4K MOSFET model is the version in [\[5\]](#markdown-header-publications)
+* Cryo-MEM assumes wire resistivity's temperature dependency follows that of the bulk wire.
+* Cryo-Pipeline is the version proposed in [\[3\]](#markdown-header-publications).
 
 #### Pre-requirements
-
- * Python 3.8
- * Protobuf (pip install protobuf)
-
+ * For Cryo-MEM
+ 	* Python 3.8
+ 	* Protobuf (pip install protobuf)
+ * For Cryo-Pipeline
+ 	* Python 3.8
+ 	* Synopsys Design Compiler Topographical Mode
+	* Synopsys Milkyway
 
 ## Cryo-MOSFET
 
-Cryo-MOSFET predicts MOSFET (i.e., Ion, Ioff) and wire characteristics (i.e., wire resistivity) at low temperatures.
+Cryo-MOSFET predicts MOSFET (i.e., Ion, Ioff) and wire characteristics (i.e., wire resistivity) at low temperatures (i.e., 77K, 4K).
 
 #### Command:
 ```
@@ -41,7 +44,7 @@ python3.8 ./pgen.py -mm {mosfet_mode} -t {temperature} -n {node} -d {vdd} -r {vt
 * mosfet_mode: type of target transistor
 	* 1: HP (High-performance) transistor
  	* 2: DRAM access transistor
-* temperature: target operating temperature (77K-300K) [K]
+* temperature: target operating temperature (i.e., 300K-77K, 4K) [K]
 * node: transistor technology node [nm]
 * vdd: supply voltage [V]
 * vth: threshold voltage at 300K (i.e., Vth0_300K) [V]
@@ -56,11 +59,17 @@ python3.8 ./pgen.py -mm {mosfet_mode} -t {temperature} -n {node} -d {vdd} -r {vt
  * Rwire: wire resistivity [Ω * nm]
 
 #### example:
+For 77K MOSFET,
 ```
-cd cryomosfet
+cd CryoMEM/CryoMOSFET_77K
 python3.8 ./pgen.py -mm 1 -t 77 -n 22 -d 0.8 -r 0.5 -wm 1
 ```
 
+For 4K MOSFET,
+```
+cd CryoMEM/CryoMOSFET_4K
+python3.8 ./pgen.py -mm 1 -t 4 -n 22 -d 0.8 -r 0.5 -wm 1
+```
 
 ## Cryo-MEM
 
@@ -74,7 +83,7 @@ python3.8 ./run.py {cacti_config_file} {temperature} {node} {vdd} {vth} {capacit
 
 #### Options:
 * cacti_config_file: memory config file (~.cfg) for cacti
-* temperature: Target operating temperature (77K-300K) [K]
+* temperature: Target operating temperature (i.e., 300K-77K, 4K) [K]
 * node: transistor technology node [nm] (NOTE: input node should match the "-technology" of the input config file)
 * vdd: Supply voltage [V]
 * vth: Threshold voltage at 300K (i.e., Vth0_300K) [V]
@@ -101,19 +110,34 @@ python3.8 ./run.py {cacti_config_file} {temperature} {node} {vdd} {vth} {capacit
 	:
 
 		cd CryoMEM
+		
+		# for the 77K SRAM cache
 		python3.8 run.py configs/cache-sram.cfg 77 22 1 0.4 8192 cache
+		
+		# for the 4K SRAM cache
+		python3.8 run.py configs/cache-sram.cfg 4 22 1 0.4 8192 cache
 
 3. Run 3T-eDRAM cache
 	:
 
 		cd CryoMEM
+		
+		# for the 77K 3T-eDRAM cache
 		python3.8 run.py configs/cache-3tedram.cfg 77 22 1 0.4 8192 cache
+		
+		# for the 4K 3T-eDRAM cache
+		python3.8 run.py configs/cache-3tedram.cfg 4 22 1 0.4 8192 cache
 
 4. Run DRAM memory
 	:
 
 		cd CryoMEM
+		
+		# for the 77K DRAM memory
 		python3.8 run.py ./configs/DRAM.cfg 77 22 1.2 0.4 262144 dram 1.2 0.4
+		
+		# for the 4K DRAM memory
+		python3.8 run.py ./configs/DRAM.cfg 4 22 1.2 0.4 262144 dram 1.2 0.4
 
 
 ## Contributors
@@ -135,3 +159,5 @@ If you use this modeling framework for your research, please cite the papers bel
 [\[3\]](#markdown-header-publications) [Byun, I., Min, D., Lee, G. H., Na, S., & Kim, J. "CryoCore: A Fast and Dense Processor Architecture for Cryogenic Computing." *Proceedings of the 47th International Symposium on Computer Architecture (ISCA'20).*](https://ieeexplore.ieee.org/abstract/document/9138996)
 
 [\[4\]](#markdown-header-publications) [Min, D., Chung, Y., Byun, I., Kim, J., & Kim, J. "CryoWire: wire-driven microarchitecture designs for cryogenic computing." *Proceedings of the 27th ACM International Conference on Architectural Support for Programming Languages and Operating Systems (ASPLOS'22).*](https://dl.acm.org/doi/abs/10.1145/3503222.3507749)
+
+[\[5\]](#markdown-header-publications) [Byun, I., Kim, J., Min, D., Nagaoka, I., Fukumitsu, K., Ishikawa, I., Tanimoto, T., Tanaka, M., Inoue, K. and Kim, J. "XQsim: modeling cross-technology control processors for 10+ K qubit quantum computers." *Proceedings of the 49th Annual International Symposium on Computer Architecture (ISCA'22).*](https://dl.acm.org/doi/abs/10.1145/3470496.3527417)
