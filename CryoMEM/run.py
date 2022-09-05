@@ -17,8 +17,14 @@ def model_cache(cacti_config_file, capacity, pgen_output):
     cacti_input.tech_param.sram_cell.Vth = pgen_output.output_parameter.nmos.Vth_on
     cacti_input.tech_param.sram_cell.I_on_n = pgen_output.output_parameter.nmos.Ion
     cacti_input.tech_param.sram_cell.I_on_p = pgen_output.output_parameter.pmos.Ion
-    cacti_input.tech_param.sram_cell.I_off_n = pgen_output.output_parameter.nmos.Isub
-    cacti_input.tech_param.sram_cell.I_off_p = pgen_output.output_parameter.pmos.Isub
+    if pgen_output.output_parameter.nmos.Isub == 0.0:
+        cacti_input.tech_param.sram_cell.I_off_n = 1e-12
+    else:
+        cacti_input.tech_param.sram_cell.I_off_n = pgen_output.output_parameter.nmos.Isub
+    if pgen_output.output_parameter.pmos.Isub == 0.0:
+        cacti_input.tech_param.sram_cell.I_off_p = 1e-12
+    else:
+        cacti_input.tech_param.sram_cell.I_off_p = pgen_output.output_parameter.pmos.Isub
     cacti_input.tech_param.sram_cell.I_g_on_n = pgen_output.output_parameter.nmos.Igate
     cacti_input.tech_param.sram_cell.I_g_on_p = pgen_output.output_parameter.pmos.Igate
     cacti_input.tech_param.sram_cell.n_to_p_eff_curr_drv_ratio = pgen_output.output_parameter.nmos.Ion / pgen_output.output_parameter.pmos.Ion
@@ -29,8 +35,14 @@ def model_cache(cacti_config_file, capacity, pgen_output):
     cacti_input.tech_param.peri_global.Vth = pgen_output.output_parameter.nmos.Vth_on
     cacti_input.tech_param.peri_global.I_on_n = pgen_output.output_parameter.nmos.Ion
     cacti_input.tech_param.peri_global.I_on_p = pgen_output.output_parameter.pmos.Ion
-    cacti_input.tech_param.peri_global.I_off_n = pgen_output.output_parameter.nmos.Isub
-    cacti_input.tech_param.peri_global.I_off_p = pgen_output.output_parameter.pmos.Isub
+    if pgen_output.output_parameter.nmos.Isub == 0.0:
+        cacti_input.tech_param.peri_global.I_off_n = 1e-12
+    else:
+        cacti_input.tech_param.peri_global.I_off_n = pgen_output.output_parameter.nmos.Isub
+    if pgen_output.output_parameter.pmos.Isub == 0.0:
+        cacti_input.tech_param.peri_global.I_off_p = 1e-12
+    else:
+        cacti_input.tech_param.peri_global.I_off_p = pgen_output.output_parameter.pmos.Isub
     cacti_input.tech_param.peri_global.I_g_on_n = pgen_output.output_parameter.nmos.Igate
     cacti_input.tech_param.peri_global.I_g_on_p = pgen_output.output_parameter.pmos.Igate
     cacti_input.tech_param.peri_global.n_to_p_eff_curr_drv_ratio = pgen_output.output_parameter.nmos.Ion / pgen_output.output_parameter.pmos.Ion
@@ -140,16 +152,17 @@ def main():
     # Code to support 4K
     pgen_path = None
     if args.temperature >= 77:
-        pgen_path = args.pgen
-    elif args.temperature == 4:
+        #pgen_path = args.pgen
+        pgen_path = './CryoMOSFET_77K/pgen.py'
+    elif args.temperature >= 4:
         pgen_path = './CryoMOSFET_4K/pgen.py'
     else:
         print ("Current version of CryoMEM does not support {}K.".format (args.temperature))
         exit ()
 
-    hp_results = pgen.run(args.pgen, pgen.mosfet_mode.HP, args.temperature, args.node, args.vdd, args.vth)
+    hp_results = pgen.run(pgen_path, pgen.mosfet_mode.HP, args.temperature, args.node, args.vdd, args.vth)
     if args.cell_type == 'dram':
-        acc_results = pgen.run(args.pgen, pgen.mosfet_mode.ACC, args.temperature, args.node, args.acc_vdd, args.acc_vth)
+        acc_results = pgen.run(pgen_path, pgen.mosfet_mode.ACC, args.temperature, args.node, args.acc_vdd, args.acc_vth)
         model_dram(args.cacti_config_file, {'hp': hp_results, 'wl': acc_results})
     else:
         model_cache(args.cacti_config_file, args.capacity, hp_results)

@@ -69,8 +69,9 @@ def run(pgen, mode, temperature, node, vdd, vth):
         '--node', str(node),
         '--vdd', str(vdd),
         '--vth', str(vth))
-
-    parse_output(pgen_output.output_parameter, check_output(cmd, text=True, cwd=os.path.dirname(pgen)))
+    
+    #parse_output(pgen_output.output_parameter, check_output(cmd, text=True, cwd=os.path.dirname(pgen)))
+    parse_output(pgen_output.output_parameter, check_output(cmd, text=True))
 
     return pgen_output
 
