@@ -70,8 +70,14 @@ def model_dram(cacti_config_file, pgen_output, mode=0):
     cacti_input.tech_param.dram_acc.Vth =  pgen_output["wl"].output_parameter.nmos.Vth0
     cacti_input.tech_param.dram_acc.I_on_n = pgen_output["wl"].output_parameter.nmos.Ion
     cacti_input.tech_param.dram_acc.I_on_p = pgen_output["wl"].output_parameter.pmos.Ion
-    cacti_input.tech_param.dram_acc.I_off_n = pgen_output["wl"].output_parameter.nmos.Isub
-    cacti_input.tech_param.dram_acc.I_off_p = pgen_output["wl"].output_parameter.pmos.Isub
+    if pgen_output["wl"].output_parameter.nmos.Isub == 0.0:
+        cacti_input.tech_param.dram_acc.I_off_n = 1e-12
+    else:
+        cacti_input.tech_param.dram_acc.I_off_n = pgen_output["wl"].output_parameter.nmos.Isub
+    if pgen_output["wl"].output_parameter.pmos.Isub == 0.0:
+        cacti_input.tech_param.dram_acc.I_off_p = 1e-12
+    else:
+        cacti_input.tech_param.dram_acc.I_off_p = pgen_output["wl"].output_parameter.pmos.Isub
     cacti_input.tech_param.dram_acc.I_g_on_n = pgen_output["wl"].output_parameter.nmos.Igate
     cacti_input.tech_param.dram_acc.I_g_on_p = pgen_output["wl"].output_parameter.pmos.Igate
     cacti_input.tech_param.dram_acc.n_to_p_eff_curr_drv_ratio = pgen_output["wl"].output_parameter.nmos.Ion / pgen_output["wl"].output_parameter.pmos.Ion
@@ -82,8 +88,14 @@ def model_dram(cacti_config_file, pgen_output, mode=0):
     cacti_input.tech_param.dram_wl.Vth = pgen_output["wl"].output_parameter.nmos.Vth0
     cacti_input.tech_param.dram_wl.I_on_n = pgen_output["wl"].output_parameter.nmos.Ion
     cacti_input.tech_param.dram_wl.I_on_p = pgen_output["wl"].output_parameter.pmos.Ion
-    cacti_input.tech_param.dram_wl.I_off_n = pgen_output["wl"].output_parameter.nmos.Isub
-    cacti_input.tech_param.dram_wl.I_off_p = pgen_output["wl"].output_parameter.pmos.Isub
+    if pgen_output["wl"].output_parameter.nmos.Isub == 0.0:
+        cacti_input.tech_param.dram_wl.I_off_n = 1e-12
+    else:
+        cacti_input.tech_param.dram_wl.I_off_n = pgen_output["wl"].output_parameter.nmos.Isub
+    if pgen_output["wl"].output_parameter.pmos.Isub == 0.0:
+        cacti_input.tech_param.dram_wl.I_off_p = 1e-12
+    else:
+        cacti_input.tech_param.dram_wl.I_off_p = pgen_output["wl"].output_parameter.pmos.Isub
     cacti_input.tech_param.dram_wl.I_g_on_n = pgen_output["wl"].output_parameter.nmos.Igate
     cacti_input.tech_param.dram_wl.I_g_on_p = pgen_output["wl"].output_parameter.pmos.Igate
     cacti_input.tech_param.dram_wl.n_to_p_eff_curr_drv_ratio = pgen_output["wl"].output_parameter.nmos.Ion / pgen_output["wl"].output_parameter.pmos.Ion
@@ -94,8 +106,14 @@ def model_dram(cacti_config_file, pgen_output, mode=0):
     cacti_input.tech_param.peri_global.Vth = pgen_output["hp"].output_parameter.nmos.Vth_on
     cacti_input.tech_param.peri_global.I_on_n = pgen_output["hp"].output_parameter.nmos.Ion
     cacti_input.tech_param.peri_global.I_on_p = pgen_output["hp"].output_parameter.pmos.Ion
-    cacti_input.tech_param.peri_global.I_off_n = pgen_output["hp"].output_parameter.nmos.Isub
-    cacti_input.tech_param.peri_global.I_off_p = pgen_output["hp"].output_parameter.pmos.Isub
+    if pgen_output["hp"].output_parameter.nmos.Isub == 0.0:
+        cacti_input.tech_param.peri_global.I_off_n = 1e-12
+    else:
+        cacti_input.tech_param.peri_global.I_off_n = pgen_output["hp"].output_parameter.nmos.Isub
+    if pgen_output["hp"].output_parameter.pmos.Isub == 0.0:
+        cacti_input.tech_param.peri_global.I_off_p = 1e-12
+    else:
+        cacti_input.tech_param.peri_global.I_off_p = pgen_output["hp"].output_parameter.pmos.Isub
     cacti_input.tech_param.peri_global.I_g_on_n = pgen_output["hp"].output_parameter.nmos.Igate
     cacti_input.tech_param.peri_global.I_g_on_p = pgen_output["hp"].output_parameter.pmos.Igate
     cacti_input.tech_param.peri_global.n_to_p_eff_curr_drv_ratio = pgen_output["hp"].output_parameter.nmos.Ion / pgen_output["hp"].output_parameter.pmos.Ion
