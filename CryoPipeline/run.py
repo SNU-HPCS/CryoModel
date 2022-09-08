@@ -268,10 +268,10 @@ def main ():
 
     # Input-requirement checking.
     if node != 45:
-        print ("Currently, Pgen only provides 45nm.")
+        print ("Currently, CryoPipeline only supports 45nm.")
         exit ()
     if not any ((temperature == key_) for key_ in [300, 77, 4]):
-        print ("Currently, Pgen only provides 300K, 77K, and 4K.")
+        print ("Currently, CryoPipeline only supports 300K, 77K, and 4K.")
         exit ()
 
     run_pgen (temperature, node, vdd, vth)
