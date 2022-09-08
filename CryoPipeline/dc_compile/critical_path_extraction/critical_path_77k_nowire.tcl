@@ -21,6 +21,6 @@ read_ddc $src_path/../${TOP_MODULE}_77k_nowire.ddc
 
 set REPORT_DIR "./latency_result"
 
-redirect ${REPORT_DIR}/${TOP_MODULE}_critical_path_77k_nowire           {report_timing}
+redirect ${REPORT_DIR}/${TOP_MODULE}_critical_path_77k_nowire {report_timing -through [get_pins -of_objects {  genblk1.vcr/ips[3].ipc/chi/flit_dataq*}] -through [get_pins -of_objects {  genblk1.vcr/ips[8].ipc/fb/genblk2.samqc/queues[1].fc/genblk1.pop_addrq*}]}
 redirect ${REPORT_DIR}/${TOP_MODULE}_power_77k_nowire                   {report_power -hierarchy -levels 10}
 exit

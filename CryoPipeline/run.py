@@ -22,33 +22,74 @@ def set_targets (design_name):
         file_list = file_list + [dir_name+name_ for name_ in os.listdir (dir_name)]
 
     for file_name in file_list:
-        f = open (file_name, "r")
-        nf = open (file_name+"_", "w")
-        lines = f.readlines ()
-        for line in lines:
-            if "set TOP_MODULE" in line:
-                nf.write ("set TOP_MODULE {}\n".format (design_name))
-            else:
-                nf.write (line)
-        f.close ()
-        nf.close ()
-        os.system ("rm {}".format (file_name))
-        os.system ("mv {} {}".format (file_name+"_", file_name))
+        if ".tcl" in file_name:
+            f = open (file_name, "r")
+            nf = open (file_name+"_", "w")
+            lines = f.readlines ()
+            for line in lines:
+                if "set TOP_MODULE" in line:
+                    nf.write ("set TOP_MODULE {}\n".format (design_name))
+                else:
+                    nf.write (line)
+            f.close ()
+            nf.close ()
+            os.system ("rm {}".format (file_name))
+            os.system ("mv {} {}".format (file_name+"_", file_name))
 
 
 def run_synthesis (design_name, temperature):
-    if not os.path.isfile ("./latency_result/{}_critical_path_300k".format (design_name)):
+    if not os.path.isfile ("./latency_result/critical_path_300k"):
         if not os.path.isfile ("./{}_300k.ddc".format (design_name)):
             os.system ("make dc-topo-300k")
-    if not os.path.isfile ("./latency_result/{}_critical_path_300k_nowire".format (design_name)):
+    if not os.path.isfile ("./latency_result/critical_path_300k_nowire"):
         if not os.path.isfile ("./{}_300k_nowire.ddc".format (design_name)):
             os.system ("make dc-topo-300k-nowire")
-    if not os.path.isfile ("./latency_result/{}_critical_path_{}k".format (design_name, temperature)):
+    if not os.path.isfile ("./latency_result/critical_path_{}k".format (temperature)):
         if not os.path.isfile ("./{}_{}k.ddc".format (design_name, temperature)):
             os.system ("make dc-topo-{}k".format (temperature))
-    if not os.path.isfile ("./latency_result/{}_critical_path_{}k_nowire".format (design_name, temperature)):
+    if not os.path.isfile ("./latency_result/critical_path_{}k_nowire".format (temperature)):
         if not os.path.isfile ("./{}_{}k_nowire.ddc".format (design_name, temperature)):
             os.system ("make dc-topo-{}k-nowire".format (temperature))
+
+
+def critical_path_analysis (design_name, temperature):
+
+    f = open ("./latency_result/{}_critical_path_{}k".format (design_name, temperature))
+    lines = f.readlines ()
+    paths = list ()
+    token = 0
+    for line in lines:
+        if token == 0 and "clock network delay (ideal)" in line:
+            token += 1
+        elif token == 1 and "/" in line:
+            paths.append ("/".join (line.split ("/")[:-2])+"*")
+        elif token == 1 and "library setup time" in line:
+            break
+    return list (dict.fromkeys (paths))
+
+
+def insert_paths (temperature, paths):
+    file_name = "dc_compile/critical_path_extraction/critical_path_{}k_nowire.tcl".format (temperature)
+    f = open (file_name, "r")
+    nf = open (file_name+"_", "w")
+
+    command = "redirect ${REPORT_DIR}/${TOP_MODULE}_critical_path_" + str (temperature) + "k_nowire " + \
+                "{report_timing"
+    for path in [paths[0], paths[-1]]:
+        command += " -through [get_pins -of_objects {" + path + "}]"
+    command += "}\n"
+
+    lines = f.readlines ()
+    for line in lines:
+        if "report_timing" in line:
+            nf.write (command)
+        else:
+            nf.write (line)
+    f.close ()
+    nf.close ()
+    os.system ("rm {}".format (file_name))
+    os.system ("mv {} {}".format (file_name+"_", file_name))
+
 
 
 def run_delay_extraction (design_name, temperature):
@@ -59,6 +100,8 @@ def run_delay_extraction (design_name, temperature):
     
     # 300K critical path (transistor only).
     if not os.path.isfile ("./latency_result/{}_critical_path_300k_nowire".format (design_name)):
+        paths = critical_path_analysis (design_name, 300)
+        insert_paths (300, paths)
         os.system ("make critical-300k-nowire")
     
     # Critical path at target temperature (transistor + wire).
@@ -67,6 +110,8 @@ def run_delay_extraction (design_name, temperature):
 
     # Critical path at target temperature (transistor only).
     if not os.path.isfile ("./latency_result/{}_critical_path_{}k_nowire".format (design_name, temperature)):
+        paths = critical_path_analysis (design_name, temperature)
+        insert_paths (temperature, paths)
         os.system ("make critical-{}k-nowire".format (temperature))
     
 
@@ -74,18 +119,18 @@ def run_pgen (temperature, node=45, vdd=None, vth=None):
     pgen_output = None
     if temperature >= 77:
         if vdd == None and vth == None:
-            result = run ("python ../CryoMOSFET/CryoMOSFET_77K/pgen.py -n {} -t {}".format (node, temperature), \
-                    stdout=PIPE, stderr=PIPE, universal_newlines=True, shell=True)
+            result = run ("python ../CryoMOSFET/CryoMOSFET_77K/pgen.py -n {} -t {}".format \
+            (node, temperature), stdout=PIPE, stderr=PIPE, universal_newlines=True, shell=True)
         else:
-            result = run ("python ../CryoMOSFET/CryoMOSFET_77K/pgen.py -n {} -d {} -r {} -t {}".format (node, vdd, vth, temperature), \
-                    stdout=PIPE, stderr=PIPE, universal_newlines=True, shell=True)
+            result = run ("python ../CryoMOSFET/CryoMOSFET_77K/pgen.py -n {} -d {} -r {} -t {}".format \
+                (node, vdd, vth, temperature), stdout=PIPE, stderr=PIPE, universal_newlines=True, shell=True)
     else:
         if vdd == None and vth == None:
-            result = run ("python ../CryoMOSFET/CryoMOSFET_4K/pgen.py -n {} -t {}".format (node, temperature), \
-                    stdout=PIPE, stderr=PIPE, universal_newlines=True, shell=True)
+            result = run ("python ../CryoMOSFET/CryoMOSFET_4K/pgen.py -n {} -t {}".format \
+                (node, temperature), stdout=PIPE, stderr=PIPE, universal_newlines=True, shell=True)
         else:
-            result = run ("python ../CryoMOSFET/CryoMOSFET_4K/pgen.py -n {} -d {} -r {} -t {}".format (node, vdd, vth, temperature), \
-                    stdout=PIPE, stderr=PIPE, universal_newlines=True, shell=True)
+            result = run ("python ..CryoMOSFET/CryoMOSFET_4K/pgen.py -n {} -d {} -r {} -t {}".format \
+                (node, vdd, vth, temperature), stdout=PIPE, stderr=PIPE, universal_newlines=True, shell=True)
     return result.stdout
 
 
