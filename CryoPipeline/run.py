@@ -182,7 +182,7 @@ def report_perf_power (design_name, temperature, node, vdd, vth):
     powers_dynamic = [dynamic_powers[0], dynamic_powers[2]]
 
     #pgen_300k = run_pgen (300, node) # ITRS.
-    pgen_300k = run_pgen (300, node, 1.25, 0.47) # Intel 45nm CPU.
+    pgen_300k = run_pgen (300, node, 1.25, 0.46893) # Intel 45nm CPU.
     pgen_temp = run_pgen (temperature, node, vdd, vth)
 
     pgen_ref = dict ()

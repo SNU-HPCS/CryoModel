@@ -73,6 +73,8 @@ def main ():
         pmos_target = mosfet (temperature, node, Vdd, Vth0p_300k, 2, mosfet_mode)
         Ion_ratio = nmos_target.Ion / pmos_target.Ion
         if (Ion_ratio > Ion_ratio_ref) or (pmos_target.Vth_on > pmos_target.Vgs_on):
+            if (pmos_target.Vth_on < 0):
+                pmos_target = mosfet (temperature, node, Vdd, Vth0_300k, 2, mosfet_mode)
             break
 
     # For wire

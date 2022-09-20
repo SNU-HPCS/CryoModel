@@ -18,11 +18,11 @@ def model_cache(cacti_config_file, capacity, pgen_output):
     cacti_input.tech_param.sram_cell.I_on_n = pgen_output.output_parameter.nmos.Ion
     cacti_input.tech_param.sram_cell.I_on_p = pgen_output.output_parameter.pmos.Ion
     if pgen_output.output_parameter.nmos.Isub == 0.0:
-        cacti_input.tech_param.sram_cell.I_off_n = 1e-12
+        cacti_input.tech_param.sram_cell.I_off_n = 1e-20
     else:
         cacti_input.tech_param.sram_cell.I_off_n = pgen_output.output_parameter.nmos.Isub
     if pgen_output.output_parameter.pmos.Isub == 0.0:
-        cacti_input.tech_param.sram_cell.I_off_p = 1e-12
+        cacti_input.tech_param.sram_cell.I_off_p = 1e-20
     else:
         cacti_input.tech_param.sram_cell.I_off_p = pgen_output.output_parameter.pmos.Isub
     cacti_input.tech_param.sram_cell.I_g_on_n = pgen_output.output_parameter.nmos.Igate
@@ -36,11 +36,11 @@ def model_cache(cacti_config_file, capacity, pgen_output):
     cacti_input.tech_param.peri_global.I_on_n = pgen_output.output_parameter.nmos.Ion
     cacti_input.tech_param.peri_global.I_on_p = pgen_output.output_parameter.pmos.Ion
     if pgen_output.output_parameter.nmos.Isub == 0.0:
-        cacti_input.tech_param.peri_global.I_off_n = 1e-12
+        cacti_input.tech_param.peri_global.I_off_n = 1e-20
     else:
         cacti_input.tech_param.peri_global.I_off_n = pgen_output.output_parameter.nmos.Isub
     if pgen_output.output_parameter.pmos.Isub == 0.0:
-        cacti_input.tech_param.peri_global.I_off_p = 1e-12
+        cacti_input.tech_param.peri_global.I_off_p = 1e-20
     else:
         cacti_input.tech_param.peri_global.I_off_p = pgen_output.output_parameter.pmos.Isub
     cacti_input.tech_param.peri_global.I_g_on_n = pgen_output.output_parameter.nmos.Igate
@@ -71,11 +71,11 @@ def model_dram(cacti_config_file, pgen_output, mode=0):
     cacti_input.tech_param.dram_acc.I_on_n = pgen_output["wl"].output_parameter.nmos.Ion
     cacti_input.tech_param.dram_acc.I_on_p = pgen_output["wl"].output_parameter.pmos.Ion
     if pgen_output["wl"].output_parameter.nmos.Isub == 0.0:
-        cacti_input.tech_param.dram_acc.I_off_n = 1e-12
+        cacti_input.tech_param.dram_acc.I_off_n = 1e-20
     else:
         cacti_input.tech_param.dram_acc.I_off_n = pgen_output["wl"].output_parameter.nmos.Isub
     if pgen_output["wl"].output_parameter.pmos.Isub == 0.0:
-        cacti_input.tech_param.dram_acc.I_off_p = 1e-12
+        cacti_input.tech_param.dram_acc.I_off_p = 1e-20
     else:
         cacti_input.tech_param.dram_acc.I_off_p = pgen_output["wl"].output_parameter.pmos.Isub
     cacti_input.tech_param.dram_acc.I_g_on_n = pgen_output["wl"].output_parameter.nmos.Igate
@@ -89,11 +89,11 @@ def model_dram(cacti_config_file, pgen_output, mode=0):
     cacti_input.tech_param.dram_wl.I_on_n = pgen_output["wl"].output_parameter.nmos.Ion
     cacti_input.tech_param.dram_wl.I_on_p = pgen_output["wl"].output_parameter.pmos.Ion
     if pgen_output["wl"].output_parameter.nmos.Isub == 0.0:
-        cacti_input.tech_param.dram_wl.I_off_n = 1e-12
+        cacti_input.tech_param.dram_wl.I_off_n = 1e-20
     else:
         cacti_input.tech_param.dram_wl.I_off_n = pgen_output["wl"].output_parameter.nmos.Isub
     if pgen_output["wl"].output_parameter.pmos.Isub == 0.0:
-        cacti_input.tech_param.dram_wl.I_off_p = 1e-12
+        cacti_input.tech_param.dram_wl.I_off_p = 1e-20
     else:
         cacti_input.tech_param.dram_wl.I_off_p = pgen_output["wl"].output_parameter.pmos.Isub
     cacti_input.tech_param.dram_wl.I_g_on_n = pgen_output["wl"].output_parameter.nmos.Igate
@@ -107,11 +107,11 @@ def model_dram(cacti_config_file, pgen_output, mode=0):
     cacti_input.tech_param.peri_global.I_on_n = pgen_output["hp"].output_parameter.nmos.Ion
     cacti_input.tech_param.peri_global.I_on_p = pgen_output["hp"].output_parameter.pmos.Ion
     if pgen_output["hp"].output_parameter.nmos.Isub == 0.0:
-        cacti_input.tech_param.peri_global.I_off_n = 1e-12
+        cacti_input.tech_param.peri_global.I_off_n = 1e-20
     else:
         cacti_input.tech_param.peri_global.I_off_n = pgen_output["hp"].output_parameter.nmos.Isub
     if pgen_output["hp"].output_parameter.pmos.Isub == 0.0:
-        cacti_input.tech_param.peri_global.I_off_p = 1e-12
+        cacti_input.tech_param.peri_global.I_off_p = 1e-20
     else:
         cacti_input.tech_param.peri_global.I_off_p = pgen_output["hp"].output_parameter.pmos.Isub
     cacti_input.tech_param.peri_global.I_g_on_n = pgen_output["hp"].output_parameter.nmos.Igate
@@ -179,8 +179,10 @@ def main():
         exit ()
 
     hp_results = pgen.run(pgen_path, pgen.mosfet_mode.HP, args.temperature, args.node, args.vdd, args.vth)
+    print (hp_results)
     if args.cell_type == 'dram':
         acc_results = pgen.run(pgen_path, pgen.mosfet_mode.ACC, args.temperature, args.node, args.acc_vdd, args.acc_vth)
+        print (acc_results)
         model_dram(args.cacti_config_file, {'hp': hp_results, 'wl': acc_results})
     else:
         model_cache(args.cacti_config_file, args.capacity, hp_results)
