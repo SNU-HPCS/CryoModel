@@ -129,7 +129,7 @@ def run_pgen (temperature, node=45, vdd=None, vth=None):
             result = run ("python ../CryoMOSFET/CryoMOSFET_4K/pgen.py -n {} -t {}".format \
                 (node, temperature), stdout=PIPE, stderr=PIPE, universal_newlines=True, shell=True)
         else:
-            result = run ("python ..CryoMOSFET/CryoMOSFET_4K/pgen.py -n {} -d {} -r {} -t {}".format \
+            result = run ("python ../CryoMOSFET/CryoMOSFET_4K/pgen.py -n {} -d {} -r {} -t {}".format \
                 (node, vdd, vth, temperature), stdout=PIPE, stderr=PIPE, universal_newlines=True, shell=True)
     return result.stdout
 
@@ -182,7 +182,7 @@ def report_perf_power (design_name, temperature, node, vdd, vth):
     powers_dynamic = [dynamic_powers[0], dynamic_powers[2]]
 
     #pgen_300k = run_pgen (300, node) # ITRS.
-    pgen_300k = run_pgen (300, node, 1.25, 0.47) # Intel 45nm CPU.
+    pgen_300k = run_pgen (300, node, 1.25, 0.46893) # Intel 45nm CPU.
     pgen_temp = run_pgen (temperature, node, vdd, vth)
 
     pgen_ref = dict ()
