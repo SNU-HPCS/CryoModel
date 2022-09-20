@@ -220,8 +220,10 @@ def report_perf_power (design_name, temperature, node, vdd, vth):
 
     critical_delays_tran[1] = critical_delays_tran[1] / trans_speedup
     critical_delays_total[1] = critical_delays_tran[1] + critical_delays_wire[1]
-    powers_dynamic[1] = powers_dynamic[1] * dyn_reduction
-    powers_static[1] = powers_static[1] * stat_reduction
+    speedup = critical_delays_total[0]/critical_delays_total[1]
+
+    powers_dynamic[1] = powers_dynamic[1] * dyn_reduction * speedup
+    powers_static[1] = powers_static[1] * stat_reduction * speedup
     powers_total[1] = powers_dynamic[1] + powers_static[1]
 
     print ("================")
@@ -235,7 +237,7 @@ def report_perf_power (design_name, temperature, node, vdd, vth):
     print ("    Transistor:\t\t{0:.6f} [ns]".format (critical_delays_tran[1]))
     print ("    Wire:\t\t{0:.6f} [ns]\n".format (critical_delays_wire[1]))
     
-    print ("Speed-up:\t\t{0:.6f} times\n".format (critical_delays_total[0]/critical_delays_total[1]))
+    print ("Speed-up:\t\t{0:.6f} times\n".format (speedup))
 
     print ("================")
     print ("Power consumption at 300K")
