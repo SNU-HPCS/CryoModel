@@ -223,7 +223,7 @@ def report_perf_power (design_name, temperature, node, vdd, vth):
     speedup = critical_delays_total[0]/critical_delays_total[1]
 
     powers_dynamic[1] = powers_dynamic[1] * dyn_reduction * speedup
-    powers_static[1] = powers_static[1] * stat_reduction * speedup
+    powers_static[1] = powers_static[1] * stat_reduction
     powers_total[1] = powers_dynamic[1] + powers_static[1]
 
     print ("================")
