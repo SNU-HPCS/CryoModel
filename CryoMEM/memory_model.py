@@ -179,10 +179,8 @@ def main():
         exit ()
 
     hp_results = pgen.run(pgen_path, pgen.mosfet_mode.HP, args.temperature, args.node, args.vdd, args.vth)
-    print (hp_results)
     if args.cell_type == 'dram':
         acc_results = pgen.run(pgen_path, pgen.mosfet_mode.ACC, args.temperature, args.node, args.acc_vdd, args.acc_vth)
-        print (acc_results)
         model_dram(args.cacti_config_file, {'hp': hp_results, 'wl': acc_results})
     else:
         model_cache(args.cacti_config_file, args.capacity, hp_results)
