@@ -38,16 +38,16 @@ def set_targets (design_name):
 
 
 def run_synthesis (design_name, temperature):
-    if not os.path.isfile ("./latency_result/critical_path_300k"):
+    if not os.path.isfile ("./latency_result/{}_critical_path_300k".format (design_name)):
         if not os.path.isfile ("./{}_300k.ddc".format (design_name)):
             os.system ("make dc-topo-300k")
-    if not os.path.isfile ("./latency_result/critical_path_300k_nowire"):
+    if not os.path.isfile ("./latency_result/{}_critical_path_300k_nowire".format (design_name)):
         if not os.path.isfile ("./{}_300k_nowire.ddc".format (design_name)):
             os.system ("make dc-topo-300k-nowire")
-    if not os.path.isfile ("./latency_result/critical_path_{}k".format (temperature)):
+    if not os.path.isfile ("./latency_result/{}_critical_path_{}k".format (design_name, temperature)):
         if not os.path.isfile ("./{}_{}k.ddc".format (design_name, temperature)):
             os.system ("make dc-topo-{}k".format (temperature))
-    if not os.path.isfile ("./latency_result/critical_path_{}k_nowire".format (temperature)):
+    if not os.path.isfile ("./latency_result/{}_critical_path_{}k_nowire".format (design_name, temperature)):
         if not os.path.isfile ("./{}_{}k_nowire.ddc".format (design_name, temperature)):
             os.system ("make dc-topo-{}k-nowire".format (temperature))
 
