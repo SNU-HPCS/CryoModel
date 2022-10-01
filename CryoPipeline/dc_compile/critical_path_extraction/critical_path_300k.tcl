@@ -1,6 +1,6 @@
 define_design_lib WORK -path ./WORK
 
-set TOP_MODULE router_wrap
+set TOP_MODULE PSU
 set src_path "./src_vlg"
 set PDK_path "./freepdk-45nm/stdview"
 set SYN_path "/home/synopsys/dc_compiler_2019/syn/P-2019.03/libraries/syn"
