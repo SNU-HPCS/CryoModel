@@ -1,0 +1,101 @@
+Information: Updating design information... (UID-85)
+Warning: Design 'PSU' contains 1 high-fanout nets. A fanout number of 1000 will be used for delay calculations involving these nets. (TIM-134)
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+Design : PSU
+Version: P-2019.03
+Date   : Sat Oct  1 08:31:51 2022
+****************************************
+
+ * Some/all delay information is back-annotated.
+
+ # A fanout number of 1000 was used for high fanout net computations.
+
+Operating Conditions: typical   Library: NangateOpenCellLibrary
+Wire Load Model Mode: Inactive.
+
+  Startpoint: UUT0/UUT1/rdptr_reg_reg[0]_rep1
+              (rising edge-triggered flip-flop clocked by clk)
+  Endpoint: cwdarray_out_reg[873]
+            (rising edge-triggered flip-flop clocked by clk)
+  Path Group: clk
+  Path Type: max
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock clk (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             0.00       0.00
+  UUT0/UUT1/rdptr_reg_reg[0]_rep1/CK (SDFF_X1)            0.00 #     0.00 r
+  UUT0/UUT1/rdptr_reg_reg[0]_rep1/Q (SDFF_X1)             0.07       0.07 r
+  UUT0/UUT1/U13/Z (MUX2_X2)                               0.08 *     0.15 f
+  UUT0/UUT1/dout[0] (fifo_reg_ADDR_BW1_DATA_BW4)          0.00       0.15 f
+  UUT0/dout[0] (fifo_ADDR_BW1_DATA_BW4)                   0.00       0.15 f
+  UUT4/opcode_running[0] (psu_opNloc)                     0.00       0.15 f
+  UUT4/U62/ZN (NAND3_X2)                                  0.02 *     0.17 r
+  UUT4/U69/ZN (NAND4_X4)                                  0.03 *     0.21 f
+  UUT4/U51/ZN (INV_X4)                                    0.02 *     0.23 r
+  UUT4/U29/ZN (NAND3_X2)                                  0.02 *     0.25 f
+  UUT4/U41/ZN (NAND2_X4)                                  0.04 *     0.29 r
+  UUT4/pcu_opcode[8] (psu_opNloc)                         0.00       0.29 r
+  U119847/Z (BUF_X4)                                      0.06 *     0.35 r
+  U120006/ZN (INV_X4)                                     0.01 *     0.37 f
+  gen_maskgen[154].UUT5_I/opcode[0]_BAR (psu_maskgen_101)
+                                                          0.00       0.37 f
+  gen_maskgen[154].UUT5_I/U58/ZN (AOI22_X2)               0.03 *     0.39 r
+  gen_maskgen[154].UUT5_I/U56/ZN (OAI21_X1)               0.02 *     0.41 f
+  gen_maskgen[154].UUT5_I/U51/ZN (NAND2_X1)               0.02 *     0.43 r
+  gen_maskgen[154].UUT5_I/U100/ZN (NOR2_X2)               0.01 *     0.44 f
+  gen_maskgen[154].UUT5_I/U6/ZN (INV_X1)                  0.02 *     0.46 r
+  gen_maskgen[154].UUT5_I/U143/ZN (NOR2_X2)               0.01 *     0.46 f
+  gen_maskgen[154].UUT5_I/U87/ZN (NAND3_X1)               0.02 *     0.48 r
+  gen_maskgen[154].UUT5_I/U24/ZN (NAND3_X2)               0.04 *     0.52 f
+  gen_maskgen[154].UUT5_I/mask[0] (psu_maskgen_101)       0.00       0.52 f
+  UUT6/mask_array[154] (psu_maskext)                      0.00       0.52 f
+  UUT6/genblk1.gen_pchdemux[2].UUT0_ip/data_in[26] (demux_NUM_DATA4_DATA_BW64_3)
+                                                          0.00       0.52 f
+  UUT6/genblk1.gen_pchdemux[2].UUT0_ip/U56/ZN (AND2_X4)
+                                                          0.04 *     0.55 f
+  UUT6/genblk1.gen_pchdemux[2].UUT0_ip/data_out[26] (demux_NUM_DATA4_DATA_BW64_3)
+                                                          0.00       0.55 f
+  UUT6/U486/ZN (NAND2_X1)                                 0.03 *     0.58 r
+  UUT6/U490/ZN (NAND4_X4)                                 0.06 *     0.64 f
+  UUT6/genblk2.genblk1[0].genblk1[3].UUT2_iu_ju/data_in[2] (demux_NUM_DATA9_DATA_BW8_185)
+                                                          0.00       0.64 f
+  UUT6/genblk2.genblk1[0].genblk1[3].UUT2_iu_ju/U39/ZN (AND2_X1)
+                                                          0.06 *     0.70 f
+  UUT6/genblk2.genblk1[0].genblk1[3].UUT2_iu_ju/data_out[26] (demux_NUM_DATA9_DATA_BW8_185)
+                                                          0.00       0.70 f
+  UUT6/genblk3.genblk1[0].genblk1[27].genblk1[2].UUT4_iq_jq_kq/data_in[0] (demux_NUM_DATA2_DATA_BW1_11851)
+                                                          0.00       0.70 f
+  UUT6/genblk3.genblk1[0].genblk1[27].genblk1[2].UUT4_iq_jq_kq/data_out[0] (demux_NUM_DATA2_DATA_BW1_11851)
+                                                          0.00       0.70 f
+  UUT6/mask_ext_array[218] (psu_maskext)                  0.00       0.70 f
+  UUT7/mask_ext_array[218] (psu_cwdarrgen)                0.00       0.70 f
+  UUT7/U5188/ZN (NAND2_X1)                                0.03 *     0.73 r
+  UUT7/U5191/ZN (NOR2_X1)                                 0.01 *     0.74 f
+  UUT7/cwdarray[873] (psu_cwdarrgen)                      0.00       0.74 f
+  U91422/ZN (INV_X1)                                      0.02 *     0.75 r
+  U91423/ZN (NAND2_X1)                                    0.01 *     0.77 f
+  U91424/ZN (OAI21_X1)                                    0.03 *     0.79 r
+  U91426/ZN (NAND2_X1)                                    0.03 *     0.82 f
+  U91432/ZN (OAI22_X1)                                    0.03 *     0.85 r
+  cwdarray_out_reg[873]/D (DFF_X1)                        0.00 *     0.85 r
+  data arrival time                                                  0.85
+
+  clock clk (rise edge)                                   0.40       0.40
+  clock network delay (ideal)                             0.00       0.40
+  cwdarray_out_reg[873]/CK (DFF_X1)                       0.00       0.40 r
+  library setup time                                     -0.04       0.36
+  data required time                                                 0.36
+  --------------------------------------------------------------------------
+  data required time                                                 0.36
+  data arrival time                                                 -0.85
+  --------------------------------------------------------------------------
+  slack (VIOLATED)                                                  -0.48
+
+
+1
