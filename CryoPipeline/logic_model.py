@@ -119,10 +119,10 @@ def run_pgen (temperature, node=45, vdd=None, vth=None):
     pgen_output = None
     if temperature >= 77:
         if vdd == None and vth == None:
-            result = run ("python ../CryoMOSFET/CryoMOSFET_77K/pgen.py -n {} -t {}".format \
+            result = run ("python3.8 ../CryoMOSFET/CryoMOSFET_77K/pgen.py -n {} -t {}".format \
             (node, temperature), stdout=PIPE, stderr=PIPE, universal_newlines=True, shell=True)
         else:
-            result = run ("python ../CryoMOSFET/CryoMOSFET_77K/pgen.py -n {} -d {} -r {} -t {}".format \
+            result = run ("python3.8 ../CryoMOSFET/CryoMOSFET_77K/pgen.py -n {} -d {} -r {} -t {}".format \
                 (node, vdd, vth, temperature), stdout=PIPE, stderr=PIPE, universal_newlines=True, shell=True)
     else:
         if vdd == None and vth == None:
