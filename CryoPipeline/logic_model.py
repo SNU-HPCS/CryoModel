@@ -262,8 +262,6 @@ def main ():
     args = arg_parse ()
     temperature = args.temperature
     node = args.node
-    #vdd = args.vdd if args.vdd > 0 else 1.0     # Vdd of 45nm ITRS
-    #vth = args.vth if args.vth > 0 else 0.46893 # Vth of 45nm ITRS
     vdd = args.vdd if args.vdd > 0 else 1.25     # Vdd of 45nm Intel CPU
     vth = args.vth if args.vth > 0 else 0.46893  # Vth of 45nm Intel CPU
     design_name = args.design_name
