@@ -216,7 +216,7 @@ def report_perf_power (design_name, temperature, node, vdd, vth):
     # Dynamic power reduction (Vdd^2)
     dyn_reduction = ((pgen_target["Vdd"]**2) / (pgen_ref["Vdd"]**2))
     # Static power reduction (Isub+Igate)
-    stat_reduction = ((pgen_target["Isub"]+pgen_target["Igate"]) / (pgen_ref["Isub"]+pgen_ref["Igate"]))
+    stat_reduction = ((pgen_target["Vdd"]*(pgen_target["Isub"]+pgen_target["Igate"])) / (pgen_ref["Vdd"]*(pgen_ref["Isub"]+pgen_ref["Igate"])))
 
     critical_delays_tran[1] = critical_delays_tran[1] / trans_speedup
     critical_delays_total[1] = critical_delays_tran[1] + critical_delays_wire[1]
