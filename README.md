@@ -206,4 +206,4 @@ If you use this modeling framework for your research, please cite the papers bel
 
 [\[5\]](#markdown-header-publications) [Byun, I., Kim, J., Min, D., Nagaoka, I., Fukumitsu, K., Ishikawa, I., Tanimoto, T., Tanaka, M., Inoue, K. and Kim, J. "XQsim: modeling cross-technology control processors for 10+ K qubit quantum computers." *Proceedings of the 49th Annual International Symposium on Computer Architecture (ISCA'22).*](https://dl.acm.org/doi/abs/10.1145/3470496.3527417)
 
-[\[6\]](#markdown-header-publications) D. Min, J. Kim, J. Choi, I. Byun, K. Inoue, M. Tanaka, and J. Kim, “QIsim: Architecting 10+K Qubit QC Interfaces Toward Quantum Supremacy,” in *Proceedings of the 50th International Symposium on Computer Architecture (ISCA’23).*
+[\[6\]](#markdown-header-publications) [D. Min, J. Kim, J. Choi, I. Byun, K. Inoue, M. Tanaka, and J. Kim, “QIsim: Architecting 10+K Qubit QC Interfaces Toward Quantum Supremacy,” in *Proceedings of the 50th International Symposium on Computer Architecture (ISCA’23).*](https://doi.org/10.1145/3579371.3589036)
