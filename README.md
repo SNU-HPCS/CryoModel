@@ -78,7 +78,7 @@ We highly recommend users to use the relative performance values (e.g., 77K SRAM
 
 #### Command:
 ```
-python3.8 ./run.py {cacti_config_file} {temperature} {node} {vdd} {vth} {capacity} {memory-type} ...
+python3.8 ./memory_model.py {cacti_config_file} {temperature} {node} {vdd} {vth} {capacity} {memory-type} ...
 ```
 
 #### Options:
@@ -112,10 +112,10 @@ python3.8 ./run.py {cacti_config_file} {temperature} {node} {vdd} {vth} {capacit
 		cd CryoMEM
 		
 		# for the 77K SRAM cache
-		python3.8 run.py configs/cache-sram.cfg 77 22 1 0.4 8192 cache
+		python3.8 memory_model.py configs/cache-sram.cfg 77 22 1 0.4 8192 cache
 		
 		# for the 4K SRAM cache
-		python3.8 run.py configs/cache-sram.cfg 4 22 1 0.4 8192 cache
+		python3.8 memory_model.py configs/cache-sram.cfg 4 22 1 0.4 8192 cache
 
 3. Run 3T-eDRAM cache
 	:
@@ -123,10 +123,10 @@ python3.8 ./run.py {cacti_config_file} {temperature} {node} {vdd} {vth} {capacit
 		cd CryoMEM
 		
 		# for the 77K 3T-eDRAM cache
-		python3.8 run.py configs/cache-3tedram.cfg 77 22 1 0.4 8192 cache
+		python3.8 memory_model.py configs/cache-3tedram.cfg 77 22 1 0.4 8192 cache
 		
 		# for the 4K 3T-eDRAM cache
-		python3.8 run.py configs/cache-3tedram.cfg 4 22 1 0.4 8192 cache
+		python3.8 memory_model.py configs/cache-3tedram.cfg 4 22 1 0.4 8192 cache
 
 4. Run DRAM memory
 	:
@@ -134,10 +134,10 @@ python3.8 ./run.py {cacti_config_file} {temperature} {node} {vdd} {vth} {capacit
 		cd CryoMEM
 		
 		# for the 77K DRAM memory
-		python3.8 run.py ./configs/DRAM.cfg 77 22 1.2 0.4 262144 dram 1.2 0.4
+		python3.8 memory_model.py ./configs/DRAM.cfg 77 22 1.2 0.4 262144 dram 1.2 0.4
 		
 		# for the 4K DRAM memory
-		python3.8 run.py ./configs/DRAM.cfg 4 22 1.2 0.4 262144 dram 1.2 0.4
+		python3.8 memory_model.py ./configs/DRAM.cfg 4 22 1.2 0.4 262144 dram 1.2 0.4
 
 ## Cryo-Pipeline
 
@@ -148,7 +148,7 @@ Before using Cryo-Pipeline, users must install Synopsys Design Compiler Topograp
 
 #### Command:
 ```
-python3.8 ./run.py --design_name {name of Verilog design} --temperature {temperature} --node {node} --vdd {vdd} --vth {vth}
+python3.8 ./logic_model.py --design_name {name of Verilog design} --temperature {temperature} --node {node} --vdd {vdd} --vth {vth}
 ```
 
 #### Options:
@@ -179,10 +179,10 @@ python3.8 ./run.py --design_name {name of Verilog design} --temperature {tempera
 		# The current example uses the open-source router Verilog design (EVA) by default.
 
 		# for the Verilog design running at 77K
-		python3.8 run.py --design_name router_wrap --temperature 77 --node 45 --vdd 1.25 --vth 0.46893
+		python3.8 logic_model.py --design_name PSU --temperature 77 --node 45 --vdd 1.25 --vth 0.46893
 		
 		# for the Verilog design running at 4K
-		python3.8 run.py --design_name router_wrap --temperature 4 --node 45 --vdd 1.25 --vth 0.46893
+		python3.8 logic_model.py --design_name PSU --temperature 4 --node 45 --vdd 1.25 --vth 0.46893
 
 ## Contributors
 
