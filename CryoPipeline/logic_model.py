@@ -116,7 +116,7 @@ def run_delay_extraction (design_name, temperature):
     
 
 def run_pgen (temperature, node=45, vdd=None, vth=None):
-    pgen_output = None
+    result = None
     if temperature >= 77:
         if vdd == None and vth == None:
             result = run ("python3.8 ../CryoMOSFET/CryoMOSFET_77K/pgen.py -n {} -t {}".format \
@@ -181,9 +181,24 @@ def report_perf_power (design_name, temperature, node, vdd, vth):
     powers_static = [static_powers[0], static_powers[2]]
     powers_dynamic = [dynamic_powers[0], dynamic_powers[2]]
 
-    #pgen_300k = run_pgen (300, node) # ITRS.
+    pgen_300k_freepdk = run_pgen (300, node, 1.1, 0.46893) # FreePDK45nm.
+    #pgen_300k = run_pgen (300, node, 1.0, 0.46893) # ITRS.
+    #pgen_300k = run_pgen (300, node, 1.1, 0.46893) # FreePDK45nm.
     pgen_300k = run_pgen (300, node, 1.25, 0.46893) # Intel 45nm CPU.
     pgen_temp = run_pgen (temperature, node, vdd, vth)
+
+    pgen_ref_freepdk = dict ()
+    lines = pgen_300k_freepdk.split ("\n")
+    for line in lines:
+        if "Vdd" in line:
+            pgen_ref_freepdk["Vdd"] = float (line.split ()[1])
+        if "Ion" in line:
+            pgen_ref_freepdk["Ion"] = float (line.split ()[1])
+        if "Isub" in line:
+            pgen_ref_freepdk["Isub"] = float (line.split ()[1])
+        if "Igate" in line:
+            pgen_ref_freepdk["Igate"] = float (line.split ()[1])
+            break
 
     pgen_ref = dict ()
     lines = pgen_300k.split ("\n")
@@ -211,16 +226,36 @@ def report_perf_power (design_name, temperature, node, vdd, vth):
             pgen_target["Igate"] = float (line.split ()[1])
             break
 
+    # To compensate for the different voltage level at 300K (vs. 1.1V of FreePDK 45nm).
     # Transistor speed-up (Ion/Vdd)
-    trans_speedup = (pgen_target["Ion"]/pgen_target["Vdd"]) / (pgen_ref["Ion"]/pgen_ref["Vdd"])
+    trans_speedup_300k = (pgen_ref["Ion"]/pgen_ref["Vdd"]) / (pgen_ref_freepdk["Ion"]/pgen_ref_freepdk["Vdd"])
     # Dynamic power reduction (Vdd^2)
-    dyn_reduction = ((pgen_target["Vdd"]**2) / (pgen_ref["Vdd"]**2))
+    dyn_reduction_300k = ((pgen_ref["Vdd"]**2) / (pgen_ref_freepdk["Vdd"]**2))
     # Static power reduction (Isub+Igate)
-    stat_reduction = ((pgen_target["Vdd"]*(pgen_target["Isub"]+pgen_target["Igate"])) / (pgen_ref["Vdd"]*(pgen_ref["Isub"]+pgen_ref["Igate"])))
+    stat_reduction_300k = ((pgen_ref["Vdd"]*(pgen_ref["Isub"]+pgen_ref["Igate"])) \
+                      / (pgen_ref_freepdk["Vdd"]*(pgen_ref_freepdk["Isub"]+pgen_ref_freepdk["Igate"])))
+    
+    critical_delays_total_prev = critical_delays_total[0]
+    critical_delays_tran[0] = critical_delays_tran[0] / trans_speedup_300k
+    critical_delays_total[0] = critical_delays_tran[0] + critical_delays_wire[0]
+    speedup_300k = critical_delays_total_prev/critical_delays_total[0]
+
+    powers_dynamic[0] = powers_dynamic[0] * dyn_reduction_300k * speedup_300k
+    powers_static[0] = powers_static[0] * stat_reduction_300k
+    powers_total[0] = powers_dynamic[0] + powers_static[0]
+
+    # Caculate the critical-path delay and power at the target temperature.
+    # Transistor speed-up (Ion/Vdd)
+    trans_speedup = (pgen_target["Ion"]/pgen_target["Vdd"]) / (pgen_ref_freepdk["Ion"]/pgen_ref_freepdk["Vdd"])
+    # Dynamic power reduction (Vdd^2)
+    dyn_reduction = ((pgen_target["Vdd"]**2) / (pgen_ref_freepdk["Vdd"]**2))
+    # Static power reduction (Isub+Igate)
+    stat_reduction = ((pgen_target["Vdd"]*(pgen_target["Isub"]+pgen_target["Igate"])) \
+                      / (pgen_ref_freepdk["Vdd"]*(pgen_ref_freepdk["Isub"]+pgen_ref_freepdk["Igate"])))
 
     critical_delays_tran[1] = critical_delays_tran[1] / trans_speedup
     critical_delays_total[1] = critical_delays_tran[1] + critical_delays_wire[1]
-    speedup = critical_delays_total[0]/critical_delays_total[1]
+    speedup = critical_delays_total_prev/critical_delays_total[1]
 
     powers_dynamic[1] = powers_dynamic[1] * dyn_reduction * speedup
     powers_static[1] = powers_static[1] * stat_reduction
@@ -237,7 +272,7 @@ def report_perf_power (design_name, temperature, node, vdd, vth):
     print ("    Transistor:\t\t{0:.6f} [ns]".format (critical_delays_tran[1]))
     print ("    Wire:\t\t{0:.6f} [ns]\n".format (critical_delays_wire[1]))
     
-    print ("Speed-up:\t\t{0:.6f} times\n".format (speedup))
+    print ("Speed-up:\t\t{0:.6f} times\n".format (critical_delays_total[0]/critical_delays_total[1]))
 
     print ("================")
     print ("Power consumption at 300K")
