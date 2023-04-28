@@ -176,7 +176,7 @@ python3.8 ./logic_model.py --design_name {name of Verilog design} --temperature 
 
 		cd CryoPipeline
 
-		# The current example uses the open-source router Verilog design (EVA) by default.
+		# The current example uses the PSU Verilog design (developed in XQsim [\[5\]]) by default.
 
 		# for the Verilog design running at 77K
 		python3.8 logic_model.py --design_name PSU --temperature 77 --node 45 --vdd 1.25 --vth 0.46893
